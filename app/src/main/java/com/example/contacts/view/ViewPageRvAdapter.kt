@@ -13,16 +13,24 @@ import com.example.contacts.R
 import com.example.contacts.models.Contact
 
 
-private var userTouchedPosition:Int? = null  //static, because i want to access the subItemLayout to change the visibility
-private var selectedLayout:LinearLayout? = null
+private var userTouchedPositionInAllContactsPage:Int? = null  //static, because i want to access the subItemLayout to change the visibility
+private var selectedLayoutInAllContactsPage:LinearLayout? = null
+
+private var userTouchedPositionInFavouritePage:Int? = null
+private var selectedLayoutInFavouritePage:LinearLayout? = null
+
+private var userTouchedPositionInRecentPage:Int? = null
+private var selectedLayoutInRecentPage:LinearLayout? = null
+
 private const val TAG = "ViewPageRvAdapter"
 
-class ViewPageRvAdapter(val contacts: MutableList<Contact>) : RecyclerView.Adapter<ViewPageRvAdapter.ViewHolder>()
+class ViewPageRvAdapter(val contacts: MutableList<Contact> , val pageType:PageType) : RecyclerView.Adapter<ViewPageRvAdapter.ViewHolder>()
 {
 
     private lateinit var parent: ViewGroup
     private lateinit var itemTextView: TextView
 
+    enum class PageType{ ALLCONTACTS , FAVOURITES , RECENTSEARCH }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -38,21 +46,43 @@ class ViewPageRvAdapter(val contacts: MutableList<Contact>) : RecyclerView.Adapt
             profileLayout = itemView.findViewById(R.id.profile_ll)
             subItemLayout = itemView.findViewById(R.id.icon_ll)
 
+
             profileLayout.setOnClickListener {
                 Log.v(TAG,"clicked")
+
                 if(subItemLayout.visibility == View.GONE )
                 {
                     Log.v(TAG,"entered")
                     subItemLayout.visibility = View.VISIBLE
-                    selectedLayout?.visibility = View.GONE
-                    selectedLayout = subItemLayout
-                    userTouchedPosition = currentPosition
+
+                    when(pageType){
+                       PageType.ALLCONTACTS -> { selectedLayoutInAllContactsPage?.visibility = View.GONE
+                                                selectedLayoutInAllContactsPage = subItemLayout
+                                                userTouchedPositionInAllContactsPage = currentPosition  }
+
+                        PageType.FAVOURITES -> { selectedLayoutInFavouritePage?.visibility = View.GONE
+                                                  selectedLayoutInFavouritePage = subItemLayout
+                                                  userTouchedPositionInFavouritePage = currentPosition }
+
+                        PageType.RECENTSEARCH -> { selectedLayoutInRecentPage?.visibility = View.GONE
+                                                   selectedLayoutInRecentPage = subItemLayout
+                                                   userTouchedPositionInRecentPage = currentPosition }
+                    }
                 }
                 else
                 {
                     subItemLayout.visibility = View.GONE
-                    userTouchedPosition= null
-                    selectedLayout = null
+
+                    when(pageType){
+                        PageType.ALLCONTACTS -> { userTouchedPositionInAllContactsPage = null
+                                                 selectedLayoutInAllContactsPage = null }
+
+                        PageType.FAVOURITES -> { userTouchedPositionInFavouritePage = null
+                                                  selectedLayoutInFavouritePage = null }
+
+                        PageType.RECENTSEARCH -> { userTouchedPositionInRecentPage = null
+                                                   selectedLayoutInRecentPage = null }
+                    }
                 }
             }
         }
@@ -68,7 +98,11 @@ class ViewPageRvAdapter(val contacts: MutableList<Contact>) : RecyclerView.Adapt
             this.currentPosition = position
             subItemLayout = itemView.findViewById(R.id.icon_ll)
 
-            if(position != userTouchedPosition)
+            if( position != when(pageType)
+                           { PageType.ALLCONTACTS -> userTouchedPositionInAllContactsPage
+                             PageType.FAVOURITES -> userTouchedPositionInFavouritePage
+                             PageType.RECENTSEARCH -> userTouchedPositionInRecentPage } )
+
                 subItemLayout.visibility = View.GONE
             else
                 subItemLayout.visibility = View.VISIBLE

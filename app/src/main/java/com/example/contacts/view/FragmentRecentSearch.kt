@@ -40,7 +40,7 @@ class FragmentRecentSearch: Fragment(){
     ): View {
         fragmentView = inflater.inflate(R.layout.fragment_viewpager,container,false)
         fragmentRecyclerView = fragmentView.findViewById(R.id.rv)
-        fragmentRecyclerView.adapter = ViewPageRvAdapter(recentSearches)
+        fragmentRecyclerView.adapter = ViewPageRvAdapter(recentSearches,ViewPageRvAdapter.PageType.RECENTSEARCH)
         fragmentRecyclerView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         return fragmentView
     }

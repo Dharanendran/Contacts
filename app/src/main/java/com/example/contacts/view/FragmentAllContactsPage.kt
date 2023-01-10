@@ -45,7 +45,7 @@ class FragmentAllContactsPage : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_viewpager, container, false)
         recyclerView = view.findViewById(R.id.rv)
-        recyclerView.adapter = ViewPageRvAdapter(allContacts)
+        recyclerView.adapter = ViewPageRvAdapter(allContacts,ViewPageRvAdapter.PageType.ALLCONTACTS)
         recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         return view
     }

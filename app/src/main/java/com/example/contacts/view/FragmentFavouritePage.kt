@@ -37,7 +37,7 @@ class FragmentFavouritePage:Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentView = inflater.inflate(R.layout.fragment_viewpager,container,false)
         fragmentRecyclerView = fragmentView.findViewById(R.id.rv)
-        fragmentRecyclerView.adapter = ViewPageRvAdapter(favourites)
+        fragmentRecyclerView.adapter = ViewPageRvAdapter(favourites ,ViewPageRvAdapter.PageType.FAVOURITES)
         fragmentRecyclerView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         return fragmentView
     }
