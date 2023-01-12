@@ -1,4 +1,4 @@
-package com.example.contacts.models
+package com.example.contacts.domain.businessModel
 
 data class Address( val doorNo:String?,
                     val street:String? ,

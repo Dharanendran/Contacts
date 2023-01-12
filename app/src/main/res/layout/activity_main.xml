@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDE4E4"
     android:theme="@style/Theme.Contacts"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -15,7 +14,6 @@
         android:id="@+id/appBarLayout"
         android:layout_width="407dp"
         android:layout_height="71dp"
-        android:background="#EDE4E4"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -43,6 +41,7 @@
         android:layout_height="57dp"
         android:layout_marginTop="1dp"
         app:tabIndicatorColor="@color/black"
+        app:tabIndicatorFullWidth="false"
         app:tabMode="fixed">
 
     </com.google.android.material.tabs.TabLayout>

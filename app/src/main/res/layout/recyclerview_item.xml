@@ -15,20 +15,24 @@
         android:id="@+id/profile_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:clickable="true"
         android:focusable="true">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv"
-            android:layout_width="39dp"
-            android:layout_height="41dp"
-            app:cardCornerRadius="100dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginBottom="2dp"
+            app:cardCornerRadius="50dp"
+            android:elevation="2dp"
+            android:layout_gravity="center_vertical">
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/profile_person" />
 
         </androidx.cardview.widget.CardView>
@@ -37,27 +41,30 @@
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="person name"
-            android:textColor="@color/black" />
+            android:layout_gravity="center"
+            android:text="contact"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"/>
+
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/icon_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_width="382dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/profile_ll"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginStart="40dp"
-            android:background="#EDE4E4" />
+            android:background="#EDE4E4"
+            android:layout_marginTop="3dp"/>
 
         <LinearLayout
             android:layout_width="362dp"

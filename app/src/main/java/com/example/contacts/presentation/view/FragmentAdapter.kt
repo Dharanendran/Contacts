@@ -1,4 +1,4 @@
-package com.example.contacts.view
+package com.example.contacts.presentation.view
 
 import android.view.View
 import android.view.ViewGroup

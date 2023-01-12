@@ -1,4 +1,4 @@
-package com.example.contacts.view
+package com.example.contacts.presentation.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,17 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contacts.R
-import com.example.contacts.models.Contact
+import com.example.contacts.domain.businessModel.ContactBook
 
 class FragmentRecentSearch: Fragment(){
 
     lateinit var fragmentView:View
     lateinit var fragmentRecyclerView: RecyclerView
-    private val recentSearches = mutableListOf<Contact>()
+    private val recentSearches = mutableListOf<ContactBook>()
     init {
         for (i in 1..100)
             recentSearches.add(
-                Contact(
+                ContactBook(
                     "contact",
                     "$i",
                     null,
@@ -40,7 +40,7 @@ class FragmentRecentSearch: Fragment(){
     ): View {
         fragmentView = inflater.inflate(R.layout.fragment_viewpager,container,false)
         fragmentRecyclerView = fragmentView.findViewById(R.id.rv)
-        fragmentRecyclerView.adapter = ViewPageRvAdapter(recentSearches,ViewPageRvAdapter.PageType.RECENTSEARCH)
+        fragmentRecyclerView.adapter = ViewPageRvAdapter(recentSearches, ViewPageRvAdapter.PageType.RECENTSEARCH)
         fragmentRecyclerView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         return fragmentView
     }

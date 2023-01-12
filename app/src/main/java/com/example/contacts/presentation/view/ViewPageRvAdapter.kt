@@ -1,6 +1,8 @@
-package com.example.contacts.view
+package com.example.contacts.presentation.view
 
 
+import android.app.Application
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +10,10 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contacts.R
-import com.example.contacts.models.Contact
+import com.example.contacts.domain.businessModel.ContactBook
 
 
 private var userTouchedPositionInAllContactsPage:Int? = null  //static, because i want to access the subItemLayout to change the visibility
@@ -24,7 +27,7 @@ private var selectedLayoutInRecentPage:LinearLayout? = null
 
 private const val TAG = "ViewPageRvAdapter"
 
-class ViewPageRvAdapter(val contacts: MutableList<Contact> , val pageType:PageType) : RecyclerView.Adapter<ViewPageRvAdapter.ViewHolder>()
+class ViewPageRvAdapter(val contacts: MutableList<ContactBook>, val pageType: PageType) : RecyclerView.Adapter<ViewPageRvAdapter.ViewHolder>()
 {
 
     private lateinit var parent: ViewGroup
@@ -46,8 +49,8 @@ class ViewPageRvAdapter(val contacts: MutableList<Contact> , val pageType:PageTy
             profileLayout = itemView.findViewById(R.id.profile_ll)
             subItemLayout = itemView.findViewById(R.id.icon_ll)
 
-
             profileLayout.setOnClickListener {
+
                 Log.v(TAG,"clicked")
 
                 if(subItemLayout.visibility == View.GONE )
@@ -85,6 +88,7 @@ class ViewPageRvAdapter(val contacts: MutableList<Contact> , val pageType:PageTy
                     }
                 }
             }
+
         }
 
         fun bindItems(position:Int) {
@@ -107,6 +111,7 @@ class ViewPageRvAdapter(val contacts: MutableList<Contact> , val pageType:PageTy
             else
                 subItemLayout.visibility = View.VISIBLE
 
+
             callIcon.setOnClickListener{
 
             }
@@ -116,7 +121,7 @@ class ViewPageRvAdapter(val contacts: MutableList<Contact> , val pageType:PageTy
             }
 
             infoIcon.setOnClickListener {
-
+                parent.context.startActivity(Intent(parent.context, InfoActivity::class.java))
             }
 
         }
